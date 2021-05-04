@@ -6,9 +6,9 @@
 #include <stdlib.h>
 
 int main (int argc,char const *argv[]){
-   intsockfd, clen, clientfd;
-   structsockaddr_in saddr, caddr;
-   unsignedshortport =8080;
+   int sockfd, clen, clientfd;
+   struct sockaddr_in saddr, caddr;
+   unsigned short port =8080;
 
 
     if((sockfd=socket(AF_INET, SOCK_STREAM,0)) <0){
@@ -24,13 +24,14 @@ int main (int argc,char const *argv[]){
     if((bind(sockfd, (structsockaddr *) &saddr,sizeof(saddr)) <0){
        printf(“Error binding\n”)
        return -1;
-}
+    }
     if(listen(sockfd,5)<0){
         printf(“Error listening\n”);
         return -1;
-}
+    }
     clen=sizeof(caddr);
     if((clientfd=accept(sockfd, (structsockaddr *) &caddr, &clen)) <0){
         printf(“Error accepting connection\n”);
         return -1;
+    }
 }
