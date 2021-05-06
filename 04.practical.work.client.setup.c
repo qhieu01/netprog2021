@@ -28,7 +28,7 @@ int main(int argc, char *argv[]){
           i++;
        }
        printf("\n");
-}
+    }
     int sockfd;
     if ((sockfd=socket(AF_INET, SOCK_STREAM, 0)) <0){
       printf("Error creating socket\n");
