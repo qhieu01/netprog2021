@@ -7,17 +7,27 @@
 #include <netdb.h>
 
 int main(int argc, char *argv[]){
-    struct hostent *host_info;
-    struct in_addr *address;
+    struct hostent *hinfo;
+     if (argc < 2) {
+      char hostname[200];
+      printf("hostname: ");
+      fgets(hostname, sizeof(hostname), stdin);
+      hinfo = gethostbyname(hostname);
+    }
+    else {
+      hinfo = gethostbyname(argv[1]);
+    }
 
-    char web[99];
-
-    strcpy(web, "usth.edu.vn");
-    printf("domain name: %s\n", web);
-
-    host_info = gethostbyname(web);
-    address = (struct in_addr *) (host_info->h_addr);
-    printf("%s has address %s\n", web, inet_ntoa(*address));
+    if (hinfo == NULL) {
+       printf("gethostbyname() failed\n");
+    } else {
+       printf("%s = ", hinfo->host_name);
+       unsigned int i=0;
+       while ( hinfo -> host_addr_list[i] != NULL) {
+          printf( "%s ", inet_ntoa( *( struct in_addr*)( hinfo -> host_addr_list[i])));
+          i++;
+       }
+       printf("\n");
 }
     int sockfd;
     if ((sockfd=socket(AF_INET, SOCK_STREAM, 0)) <0){
@@ -28,12 +38,11 @@ int main(int argc, char *argv[]){
     struct sockaddr_in saddr;
     memset(&saddr, 0, sizeof(saddr));
     saddr.sin_family = AF_INET;
-    memcpy((char *) &saddr.sin_addr.s_addr, host->h_addr_list[0], host->h_length);
+    memcpy((char *) &saddr.sin_addr.s_addr, hinfo->h_addr_list[0], host->h_length);
     saddr.sin_port = htons(99);
     if (connect(sockfd, (struct sockaddr *) &saddr, sizeof(saddr)) < 0) {
         printf("Cannot connect\n");
         perror("Connect\n");
     }
-
-    return 1;
-    }
+    printf("connect to server\n")
+}
