@@ -56,10 +56,9 @@ int main(int argc, char *argv[]){
         write(sockfd, j, strlen(j));
 
         read(sockfd, j, 999);
-        s[strlen(j) - 1] = 0;
+        j[strlen(j) - 1] = 0;
         printf("Server says: %s\n", j);
     }
 
     return 1;
-}
 }
