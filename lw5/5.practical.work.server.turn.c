@@ -21,7 +21,7 @@ int main (int argc,char const *argv[]){
     saddr.sin_addr.s_addr = htonl(INADDR_ANY);
     saddr.sin_port = htons(port);
 
-    if((bind(sockfd, (structsockaddr *) &saddr,sizeof(saddr)) <0){
+    if((bind(sockfd, (struct sockaddr *) &saddr,sizeof(saddr)) <0){
        printf(“Error binding\n”)
        return -1;
     }
@@ -30,24 +30,22 @@ int main (int argc,char const *argv[]){
         return -1;
     }
     clen=sizeof(caddr);
-    if((clientfd=accept(sockfd, (structsockaddr *) &caddr, &clen)) <0){
+    if((clientfd=accept(sockfd, (struct sockaddr *) &caddr, &clen)) <0){
         printf(“Error accepting connection\n”);
 
         printf("Start");
-
+    }
     while (1) {
         char j[999];
 		memset(j, 0, 999);
 		read(clientfd, j, 999);
-		[strlen(s) - 1] = 0;
+		strlen(j) - 1 = 0;
 		printf("Client says: %s\n", j);
-
 		printf("Server> ");
-      	fgets\(j, 999, stdin);
+      	fgets(j, 999, stdin);
       	write(clientfd, j, strlen(j));
     }
 
 
         return -1;
-
 }
