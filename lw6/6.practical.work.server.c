@@ -48,9 +48,7 @@ int main (int argc,char const *argv[]){
     }
 
 
-        return -1;
 
-}
 while (1) {
             int n = recv(clientfd, buffer, sizeof(buffer), 0);
             if (n == 0)
@@ -69,3 +67,5 @@ while (1) {
                 scanf("%s", buffer);
                 send(clientfd, buffer, strlen(buffer)+1, 0);
             }
+       return -1;
+{
