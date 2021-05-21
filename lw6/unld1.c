@@ -50,22 +50,18 @@ int main (int argc,char const *argv[]){
 
 
 while (1) {
-            int n = recv(clientfd, buffer, sizeof(buffer), 0);
-            if (n == 0)
-                printf("Error!!!\n");
+            printf("Enter: ");
+            memset(buffer, 0, sizeof(buffer));
+            scanf("%s", buffer);
+            send(sockfd, buffer, strlen(buffer)+1, 0);
+            memset(buffer, sizeof(buffer), 0);
+            if (recv(sockfd, buffer, sizeof(buffer), 0) == 0) {
+                printf("Error!!\n");
                 exit(0);
-            else
-                int firstChar = 0;
-                for (int i = 0; i < n; i++) {
-                    if (buffer[i] == '\0') 
-                        printf("From client: %s\n", &buffer[firstChar]);
-                        firstChar = i+1;   
+            } else {
+                    printf("From client: %s\n", buffer);
+                    exit(0);
                 }
-                
-                memset(buffer, 0, sizeof(buffer));
-                printf("Enter: ");
-                scanf("%s", buffer);
-                send(clientfd, buffer, strlen(buffer)+1, 0);
             }
        return -1;
-{
+    }
