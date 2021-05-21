@@ -59,9 +59,6 @@ int main(int argc, char *argv[]){
         s[strlen(j) - 1] = 0;
         printf("Server says: %s\n", j);
     }
-
-    return 1;
-}
 while (1) {
     printf("Enter: ");
     memset(buffer, 0, sizeof(buffer));
@@ -74,5 +71,6 @@ while (1) {
     } else {
             printf("Mesage from server: %s\n", buffer);
             exit(0);
-        }
+    }
+    return 1;
 }
